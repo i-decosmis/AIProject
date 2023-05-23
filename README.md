@@ -10,3 +10,4 @@ Nome Cognome, matricola, mail
 * main.py e' il file python che contiene l'algoritmo che crea la rete di Petri in formato pnml
 * petri_net.pnml e' il risultato della sua esecuzione con il dataset in input
 * Nella cartella model_user_1 si trova il programma python usato per ottenere i csv da cui leggere i dati
+* Caso_di_studio_AI.pdf e' il file che contiene la relazione
