@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml>
+  <net>
+    <place id="0">
+6">
+12">
+2">
+4">
+ame>
+    </place>
+    <place id="4">
+      <name>Place2</name>
+    </place>
+    <transition id="9">
+      <name>Transition1</name>
+    </transition>
+    <transition id="15">
+      <name>Transition2</name>
+    </transition>
+    <arc id="2">
+      <source>Place1</source>
+      <target>Transition1</target>
+    </arc>
+    <arc id="21">
+      <source>Transition1</source>
+      <target>Place2</target>
+    </arc>
+  </net>
+</pnml>
