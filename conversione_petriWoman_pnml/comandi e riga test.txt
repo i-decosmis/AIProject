@@ -1,2 +1,2 @@
 consult("Percorso file").
-write_pnml("Percorso dove salvare il file", ['Place1', 'Place2'], ['Transition1', 'Transition2'], [arc('Place1', 'Transition1'), arc('Transition1', 'Place2')]).
+process_file("Percorso dove leggere il file txt").
