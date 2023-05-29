@@ -104,9 +104,9 @@ extract_arc(Line, Info) :-
     Info = (FirstInfo, SecondInfo).
 
 % Funzione per stampare la lista in input
-print_list([]).                  % Base case: an empty list
-print_list([Head|Tail]) :-       % Recursive case: non-empty list
-    writeln(Head),               % Output the head of the list
+print_list([]).                  % Caso base lista vuota
+print_list([Head|Tail]) :-       % Caso ricorsivo lista non vuota
+    writeln(Head),               % In output la testa della lista
     print_list(Tail). 
 
 
