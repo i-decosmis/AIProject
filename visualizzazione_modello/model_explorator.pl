@@ -25,7 +25,6 @@ process_file(FileName) :-
     process_lines(Stream),        % Inizia ad analizzare le linee
     close(Stream),                % Chiude il file
     get_list(List),
-    writeln(List),
     print_transition(List).
 
 % Caso in cui lo Stream ha raggiunto la fine del file
@@ -60,45 +59,48 @@ read_transition(Term) :-
 
 sum(X, Y, Result) :- Result is X + Y.
 
+subtract(X, Y, Result) :- Result is X - Y.
+
 % Estraggo il contenuto tra parentesi e lo restituisco come Info
 extract_info(Line) :-
+    
     sub_string(Line, Before, _, After, '['),
     sub_string(Line, FirstBefore, _, FirstAfter, ']'),
     sum(Before, 1, Result),
     sum(FirstAfter, 1, ResultTwo),
     sub_string(Line, Result , _, ResultTwo, FirstInfo),
-    sum(FirstAfter, 2, ResultTwo),
-    sub_string(SecondInfoDirty, FirstAfter , _, 0, SecondInfoDirty),
+    sum(FirstBefore, 2, ResultThree),
+    sub_string(Line, ResultThree , _, 0, SecondInfoRaw),
     ThirdInfoRaw = SecondInfoRaw,
     sub_string(SecondInfoRaw, FourthBefore, _, FourthAfter, ']'),
-    sum(FourthAfter, 1, ResultTwo),
-    sub_string(SecondInfoRaw, 1, _, ResultTwo, SecondInfo),
+    sum(FourthAfter, 1, ResultFour),
+    sub_string(SecondInfoRaw, 1, _, ResultFour, SecondInfo),
     sub_string(ThirdInfoRaw, FifthBefore, _, FifthAfter, ','),
     sub_string(ThirdInfoRaw, SixthBefore, _, SixthAfter, ']'),
-    sum(FifthBefore, 2, Result),
-    sub_string(ThirdInfoRaw, Result, _, 0, ThirdInfoRaw),
-    FourthInfoRaw = ThirdInfoRaw,
+    sum(SixthBefore, 3, ResultFive),
+    sub_string(ThirdInfoRaw, ResultFive, _, 0, NewThirdInfoRaw),
+    FourthInfoRaw = NewThirdInfoRaw,
     sub_string(FourthInfoRaw, SeventhBefore, _, SeventhAfter, ']'),
     sub_string(FourthInfoRaw, EighthBefore, _, EighthAfter, ')'),
-    sum(SeventhBefore, 2, Result),
-    sum(EighthAfter, 1, ResultTwo),
-    sub_string(FourthInfoRaw, Result, _, ResultTwo, FourthInfo),
-    sub_string(ThirdInfoRaw, NinthBefore, _, NinthAfter, ']'),
-    sum(NinthAfter, 1, Result),
-    sub_string(ThirdInfoRaw, 0, _, Result, ThirdInfoRaw),
-    create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,ThirdInfoRaw).
+    sum(SeventhBefore, 2, ResultSix),
+    sum(EighthAfter, 1, ResultSeven),
+    sub_string(FourthInfoRaw, ResultSix, _, ResultSeven, FourthInfo),
+    sub_string(NewThirdInfoRaw, NinthBefore, _, NinthAfter, ']'),
+    sum(NinthAfter, 1, ResultEight),
+    sub_string(NewThirdInfoRaw, 0, _, ResultEight, FinalThirdInfoRaw),
+    create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,FinalThirdInfoRaw).
 
 
 create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,ThirdInfoRaw) :-
     sub_string(ThirdInfoRaw, Before, _, After, ','),
-    sub_string(ThirdInfoRaw, 0, _, After + 1, ThirdInfo),
-    sum(Before, 1, Result),
-    sub_string(ThirdInfoRaw, Result, _, 0, ThirdInfoRaw),
-    List = [FirstInfo,SecondInfo,ThirdInfo,FourthInfo],
-    add_to_list(List),
-    get_list(List),
-    writeln(List),
-    create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,ThirdInfoRaw).
+    sum(After, 1, Result),
+    sub_string(ThirdInfoRaw, 0, _, Result, ThirdInfo),
+    sum(Before, 1, ResultNine),
+    sub_string(ThirdInfoRaw, ResultNine, _, 0, NewThirdInfoRaw),
+    Transition = [FirstInfo,SecondInfo,ThirdInfo,FourthInfo],
+    writeln(Transition),
+    add_to_list(Transition),
+    create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,NewThirdInfoRaw).
 
 create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,ThirdInfoRaw) :-
     !,
