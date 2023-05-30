@@ -90,7 +90,7 @@ read_arc(Term) :-
 extract_info(Line, Info) :-
     sub_string(Line, Before, _, After, '('),
     sub_string(Line, Before, _, 0, InfoWithParenthesis),
-    sub_string(InfoWithParenthesis, 1, _, 1, Info).
+    sub_string(InfoWithParenthesis, 1, _, 2, Info).
 
 
 % Estraggo arco dalla linea in input e lo restituisco come Info
@@ -100,7 +100,7 @@ extract_arc(Line, Info) :-
     sub_string(Line, Before, _, AfterComma, FirstInfoDirty),
     sub_string(FirstInfoDirty, 1, _, 1, FirstInfo),
     sub_string(Line, BeforeComma, _, 0, SecondInfoDirty),
-    sub_string(SecondInfoDirty, 1, _, 1, SecondInfo),
+    sub_string(SecondInfoDirty, 1, _, 2, SecondInfo),
     Info = (FirstInfo, SecondInfo).
 
 % Funzione per stampare la lista in input
