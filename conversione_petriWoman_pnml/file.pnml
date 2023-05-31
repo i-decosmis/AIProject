@@ -10,7 +10,7 @@
                 <text>p2</text>
             </name>
         </place>
-        <place id="3">
+        <place id="5">
             <name>
                 <text>p1</text>
             </name>
@@ -20,12 +20,12 @@
                 <text>t1</text>
             </name>
         </transition>
-        <arc id="2" source="t1" target="p2">
+        <arc id="6" source="t1" target="p2">
             <inscription>
                 <text>1</text>
             </inscription>
         </arc>
-        <arc id="7" source="p1" target="t1">
+        <arc id="2" source="p1" target="t1">
             <inscription>
                 <text>1</text>
             </inscription>

@@ -26,8 +26,9 @@ process_file(FileName) :-
     retractall(string_list(1, List)),
     retractall(string_list(2, List)),
     retractall(string_list(3, List)),
+    dynamic(counter/1),
     consult(FileName),
-    process_net,        % Inizia ad analizzare le linee
+    process_net,        % Inizia ad analizzare la rete
     get_strings(1, Places),
     get_strings(2, Transitions),
     get_strings(3, Arcs),
@@ -39,18 +40,19 @@ ask_folder_path(String) :-
     write('Enter path where to save file: '),
     read_line_to_string(user_input, String).
 
-% Extract places into a list called "Places"
+% Estraggo tutti i place in una lista
 extract_places(Places) :-
     findall(Place, place(Place), Places).
 
-% Extract transitions into a list called "Transitions"
+% Estraggo tutte le transitioni in una lista
 extract_transitions(Transitions) :-
     findall(Transition, transition(Transition), Transitions).
 
-% Extract arcs into a list called "Arcs"
+% Estraggo tutti gli archi in una lista
 extract_arcs(Arcs) :-
     findall(arc(T, P, TR), arc(T, P, TR), Arcs).
 
+% Predicato che ci permette di copiare una lista in una delle 3 liste dinamiche dato indice in input
 copy_list(IdList, []) :-
     true.
 
