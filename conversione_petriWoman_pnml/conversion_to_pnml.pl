@@ -26,9 +26,8 @@ process_file(FileName) :-
     retractall(string_list(1, List)),
     retractall(string_list(2, List)),
     retractall(string_list(3, List)),
-    open(FileName, read, Stream),  % Apre il file per la lettura
-    process_lines(Stream),        % Inizia ad analizzare le linee
-    close(Stream),                % Chiude il file
+    consult(FileName),
+    process_net,        % Inizia ad analizzare le linee
     get_strings(1, Places),
     get_strings(2, Transitions),
     get_strings(3, Arcs),
@@ -40,68 +39,36 @@ ask_folder_path(String) :-
     write('Enter path where to save file: '),
     read_line_to_string(user_input, String).
 
-% Caso in cui lo Stream ha raggiunto la fine del file
-process_lines(Stream) :-
-    at_end_of_stream(Stream).
+% Extract places into a list called "Places"
+extract_places(Places) :-
+    findall(Place, place(Place), Places).
+
+% Extract transitions into a list called "Transitions"
+extract_transitions(Transitions) :-
+    findall(Transition, transition(Transition), Transitions).
+
+% Extract arcs into a list called "Arcs"
+extract_arcs(Arcs) :-
+    findall(arc(T, P, TR), arc(T, P, TR), Arcs).
+
+copy_list(IdList, []) :-
+    true.
+
+
+copy_list(IdList, [H | T]) :-
+    add_string(IdList, H),
+    copy_list(IdList, T).
+
 
 % Dato lo stream in input lo analizzo e richiamo la funzione con il nuovo Stream
-process_lines(Stream) :-
-    \+ at_end_of_stream(Stream),
-    read_line_to_string(Stream, Line),
-    process_line(Line),
-    process_lines(Stream).
+process_net :-
+    extract_places(NewPlaces),
+    copy_list(1, NewPlaces),
+    extract_transitions(NewTransitions),
+    copy_list(2, NewTransitions),
+    extract_arcs(NewArcs),
+    copy_list(3, NewArcs).
 
-% Leggo la linea in input e lo converto in atomo per poter capire se place, transition o arc
-process_line(Line) :-
-    atom_string(Term, Line),
-    process_term(Term).
-
-% Caso in cui leggo una riga place
-process_term(Term) :-
-    sub_atom(Term, _, _, _, 'place'),
-    read_places(Term).
-
-% Caso in cui leggo una rica transition
-process_term(Term) :-
-    sub_atom(Term, _, _, _, 'transition'),
-    read_transition(Term).
-
-% Caso in cui leggo una riga arc
-process_term(Term) :-
-    sub_atom(Term, _, _, _, 'arc'),
-    read_arc(Term).
-
-% Leggo places dal Term in input e lo metto nella seconda lista
-read_places(Term) :-
-    extract_info(Term, Info),
-    add_string(1, Info).
-
-% Leggo transition dal Term in input e lo metto nella seconda lista
-read_transition(Term) :-
-    extract_info(Term, Info),
-    add_string(2, Info).
-
-% Leggo arco dal Term in input e lo metto nella terza lista
-read_arc(Term) :-
-    extract_arc(Term, Info),
-    add_string(3, Info).
-
-% Estraggo il contenuto tra parentesi e lo restituisco come Info
-extract_info(Line, Info) :-
-    sub_string(Line, Before, _, After, '('),
-    sub_string(Line, Before, _, 0, InfoWithParenthesis),
-    sub_string(InfoWithParenthesis, 1, _, 2, Info).
-
-
-% Estraggo arco dalla linea in input e lo restituisco come Info
-extract_arc(Line, Info) :-
-    sub_string(Line, Before, _, After, '('),
-    sub_string(Line, BeforeComma, _, AfterComma, ','),
-    sub_string(Line, Before, _, AfterComma, FirstInfoDirty),
-    sub_string(FirstInfoDirty, 1, _, 1, FirstInfo),
-    sub_string(Line, BeforeComma, _, 0, SecondInfoDirty),
-    sub_string(SecondInfoDirty, 1, _, 2, SecondInfo),
-    Info = (FirstInfo, SecondInfo).
 
 % Funzione per stampare la lista in input
 print_list([]).                  % Caso base lista vuota
@@ -133,8 +100,12 @@ write_pnml(File, Places, Transitions, Arcs) :-
 % Scrivo intestazione file
 write_header(StreamWrite) :-
     write(StreamWrite, '<?xml version="1.0" encoding="UTF-8"?>'), nl(StreamWrite),
-    write(StreamWrite, '<pnml>'), nl(StreamWrite),
-    write(StreamWrite, '  <net>'), nl(StreamWrite).
+    write(StreamWrite, '<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">'), nl(StreamWrite),
+    write(StreamWrite, '  <net id="net1" type="http://www.pnml.org/version-2009/grammar/ptnet">'), nl(StreamWrite),
+    write(StreamWrite, '    <name>'), nl(StreamWrite),
+    write(StreamWrite, '        <text> Petri Net </text>'), nl(StreamWrite),
+    write(StreamWrite, '    </name>'), nl(StreamWrite),
+    write(StreamWrite, '    <page id="page1">'), nl(StreamWrite).
 
 
 % Questo predicato serve quando abbiamo finito tutti i place
@@ -143,12 +114,16 @@ write_places(StreamWrite, []) :-
 
 % Questo predicato serve quando ci sono ancora place da scrivere
 write_places(StreamWrite, [Place|Places]) :-
-    write(StreamWrite, '    <place id="'),
+    write(StreamWrite, '        <place id="'),
     counter(Count),
     write(StreamWrite, Count),write(StreamWrite, '">'), nl(StreamWrite),
     increment_counter,
-    write(StreamWrite, '      <name>'), write(StreamWrite, Place), write(StreamWrite, '</name>'), nl(StreamWrite),
-    write(StreamWrite, '    </place>'), nl(StreamWrite),
+    write(StreamWrite, '            <name>'), 
+    nl(StreamWrite),
+    write(StreamWrite, '                <text>'), 
+    write(StreamWrite, Place), write(StreamWrite, '</text>'), nl(StreamWrite),
+    write(StreamWrite, '            </name>'), nl(StreamWrite),
+    write(StreamWrite, '        </place>'), nl(StreamWrite),
     write_places(StreamWrite, Places).
 
 % Questo predicato serve quando abbiamo finito tutte le transition
@@ -157,12 +132,16 @@ write_transitions(StreamWrite, []) :-
 
 % Questo predicato serve quando ci sono ancora transition da scrivere
 write_transitions(StreamWrite, [Transition|Transitions]) :-
-    write(StreamWrite, '    <transition id="'),
+    write(StreamWrite, '        <transition id="'),
     counter(Count),
-    write(StreamWrite, Count),write(StreamWrite, '">'),nl(StreamWrite),
+    write(StreamWrite, Count),write(StreamWrite, '">'), nl(StreamWrite),
     increment_counter,
-    write(StreamWrite, '      <name>'), write(StreamWrite, Transition), write(StreamWrite, '</name>'), nl(StreamWrite),
-    write(StreamWrite, '    </transition>'), nl(StreamWrite),
+    write(StreamWrite, '            <name>'), 
+    nl(StreamWrite),
+    write(StreamWrite, '                <text>'), 
+    write(StreamWrite, Transition), write(StreamWrite, '</text>'), nl(StreamWrite),
+    write(StreamWrite, '            </name>'), nl(StreamWrite),
+    write(StreamWrite, '        </transition>'), nl(StreamWrite),
     write_transitions(StreamWrite, Transitions).
 
 % Questo predicato serve quando abbiamo finito tutti gli arc
@@ -170,18 +149,28 @@ write_arcs(StreamWrite, []) :-
     true.
 
 % Questo predicato serve quando ci sono ancora arc da scrivere
-write_arcs(StreamWrite, [(Source, Target)|Arcs]) :-
-    write(StreamWrite, '    <arc id="'),
+write_arcs(StreamWrite, [arc(Source, Target, Token)|Arcs]) :-
+    write(StreamWrite, '        <arc id="'),
     counter(Count),
-    write(StreamWrite, Count), write(StreamWrite, '">'), nl(StreamWrite),
+    write(StreamWrite, Count),
+    write(StreamWrite, '" source="'),
+    write(StreamWrite, Source),
+    write(StreamWrite, '" target="'),
+    write(StreamWrite, Target),
+    write(StreamWrite, '">'), nl(StreamWrite),
     increment_counter,
-    write(StreamWrite, '      <source>'), write(StreamWrite, Source), write(StreamWrite, '</source>'), nl(StreamWrite),
-    write(StreamWrite, '      <target>'), write(StreamWrite, Target), write(StreamWrite, '</target>'), nl(StreamWrite),
-    write(StreamWrite, '    </arc>'), nl(StreamWrite),
+    write(StreamWrite, '            <inscription>'),nl(StreamWrite),
+    write(StreamWrite, '                <text>'),
+    write(StreamWrite, Token),
+    write(StreamWrite, '</text>'),
+    nl(StreamWrite),
+    write(StreamWrite, '            </inscription>'),nl(StreamWrite),
+    write(StreamWrite, '        </arc>'), nl(StreamWrite),
     write_arcs(StreamWrite, Arcs).
 
 % Questo predicato serve quando dobbiamo scrivere il pie di pagina pnml
 write_footer(StreamWrite) :-
+    write(StreamWrite, '    </page>'), nl(StreamWrite),
     write(StreamWrite, '  </net>'), nl(StreamWrite),
     write(StreamWrite, '</pnml>'), nl(StreamWrite).
 

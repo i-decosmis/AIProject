@@ -98,7 +98,6 @@ create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,ThirdInfoRaw) 
     sum(Before, 1, ResultNine),
     sub_string(ThirdInfoRaw, ResultNine, _, 0, NewThirdInfoRaw),
     Transition = [FirstInfo,SecondInfo,ThirdInfo,FourthInfo],
-    writeln(Transition),
     add_to_list(Transition),
     create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,NewThirdInfoRaw).
 

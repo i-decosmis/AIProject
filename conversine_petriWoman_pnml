@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml>
+  <net>
+    <place id="3">
+      <name>p2</name>
+    </place>
+    <place id="4">
+      <name>p1</name>
+    </place>
+    <transition id="5">
+      <name>t1</name>
+    </transition>
+  </net>
+</pnml>
