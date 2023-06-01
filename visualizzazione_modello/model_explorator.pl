@@ -1,125 +1,130 @@
-% Initialize an empty list
-init_list :-
-    retractall(transition_list(_)),
-    assertz(transition_list([])).
+% Soluzione per poter rendere meno vincolante il codice al modulo
+% inserito.
+% In questo modo basta inserire il nome del modulo da cui sono state
+% lette le transition per poter visualizzare nel file i dati
+% senza la necessita di fare hardcode col nome del modello
+:- dynamic module/1.
 
-% Add an element to the list
-add_to_list(Element) :-
-    retract(transition_list(List)),
-    assertz(transition_list([Element|List])).
+set_module(Atom) :-
+    retractall(module(_)),
+    assertz(module(Atom)).
 
-% Remove an element from the list
-remove_from_list(Element) :-
-    retract(transition_list(List)),
-    delete(List, Element, NewList),
-    assertz(transition_list(NewList)).
+get_module(Atom) :-
+    module(Atom).
 
-% Retrieve the current state of the list
-get_list(List) :-
-    transition_list(List).
-
-% Processa il file in input ed esporta il file pnml nuovo
+% Legge il file wf e lo elabora
 process_file(FileName) :-
-    init_list,
-    open(FileName, read, Stream),  % Apre il file per la lettura
-    process_lines(Stream),        % Inizia ad analizzare le linee
-    close(Stream),                % Chiude il file
-    get_list(List),
-    print_transition(List).
+    ask_folder_path(Path),
+    use_module(FileName),
+    ask_module_name(ModuleString),
+    string_to_atom(ModuleString, Module),
+    set_module(Module),
+    open(Path, write, Stream),
+    do_works(Stream).
 
-% Caso in cui lo Stream ha raggiunto la fine del file
-process_lines(Stream) :-
-    at_end_of_stream(Stream).
+% Inizia esecuzione principale
+do_works(Stream) :-
+    get_module(Module),
+    findall(Module:transition(Input-Output, Cases, Repetition), 
+            Module:transition(Input-Output, Cases, Repetition), 
+            ListTransitions),  % Gather all transitions into a list
+    do_work(Module, Stream, ListTransitions).
 
-% Dato lo stream in input lo analizzo e richiamo la funzione con il nuovo Stream
-process_lines(Stream) :-
-    \+ at_end_of_stream(Stream),
-    read_line_to_string(Stream, Line),
-    process_line(Line),
-    process_lines(Stream).
+% Esegue le operazioni di scrittura su file e recupero delle informazioni delle transition
+do_work(Module, Stream, [Module:transition(Input-Output, Cases, Repetition) | Rest]) :-
+    write(Stream, '------------------------------------------'),nl(Stream),
+    write(Stream, 'Starting transition:'), nl(Stream),
+    write(Stream, Input-Output),
+    write(Stream, ','),
+    write(Stream, Cases),
+    write(Stream, ','),
+    write(Stream, Repetition),nl(Stream),
+    writeln(Stream, 'You can continue to the following ones:'),
+    get_matching_transitions_with_case(Stream, Output-_, Cases, Transitions),
+    do_work(Module, Stream, Rest).
 
-% Leggo la linea in input e lo converto in atomo per poter capire se place, transition o arc
-process_line(Line) :-
-    atom_string(Term, Line),
-    process_term(Term).
+% Caso base quando le transizioni da analizzare sono finite
+do_work(Module, Stream, []).
 
-% Caso in cui leggo una riga place
-process_term(Term) :-
-    sub_atom(Term, _, _, _, 'transition(['),
-    read_transition(Term).
+% Recupera tutte le transizioni che hanno la combinazione Input-Output 
+% uguale in input e verifica caso per caso se la transizione combacia con quella ricercata
+% Alla fine tutte le transizioni che rispettano i parametri di ricerca sono salvati nella
+% lista NewTransitions
+% Tutte le transizioni che non sono gia state trovate (e quindi che non sono nella lista Transitions), vengono
+% aggiunte alla lista finale che si chiama LastTransitions che alla fine verra stampata
+get_matching_transitions_with_case(Stream, Input-Output, [Case|Cases], Transitions) :-
+    get_module(Module),
+    findall(Module:transition(Input-Output, TransitionsList, Repetition),
+            (Module:transition(Input-Output, TransitionsList, Repetition),
+             member(Case, TransitionsList)),
+            NewTransitions),
+    add_to_list_no_duplicates(NewTransitions, Transitions, LastTransitions),
+    get_matching_transitions_with_case(Stream, Input-Output, Cases, LastTransitions).
 
-% Caso in cui leggo una riga place
-process_term(Term) :-
+
+% Cerco le transition in base alla azione di input e al caso
+get_matching_transitions_with_case(Stream, Input-Output, [], Transitions) :-
+    get_matching_transitions(Input-Output, ExtraTransitions),
+    print_list(Stream, Transitions),
+    add_to_list_deleting_duplicates(ExtraTransitions, Transitions, NewExtraTransitions),
+    writeln(Stream, 'Possible transitions that could happen even if the cases do not match:'),
+    print_list(Stream, NewExtraTransitions).
+
+% Cerco le transition solo in base alla azione di input
+get_matching_transitions(Input-Output, Transitions) :-
+    get_module(Module),
+    findall(Module:transition(Input-Output, TransitionsList, Repetition),
+            Module:transition(Input-Output, TransitionsList, Repetition),
+            Transitions).
+
+% Questa procedura serve per copiare nella seconda lista tutti
+% gli elementi della prima lista che non sono presenti al suo
+% interno (Usato per trovare i casi con la corrispondenza senza
+% tenere duplicati)
+add_to_list_no_duplicates([], List, List).
+
+add_to_list_no_duplicates([H|B], SecondList, Output) :-
+    member(H, SecondList), 
     !,
-    true.
+    add_to_list_no_duplicates(B, SecondList, Output).
 
-% Leggo places dal Term in input e lo metto nella seconda lista
-read_transition(Term) :-
-    extract_info(Term).
+add_to_list_no_duplicates([H|B], SecondList, Output) :-
+    add_to_list_no_duplicates(B, [H|SecondList], Output).
 
-sum(X, Y, Result) :- Result is X + Y.
+% Questa procedura serve per creare una nuova lista che
+% contiene gli elementi della prima lista meno gli elementi
+% della seconda (Usato per vedere i possibili casi extra senza
+% corrispondenza)
+add_to_list_deleting_duplicates(List, SecondList, Output) :-
+    add_to_list_deleting_duplicates(List, SecondList, [], Output).
 
-subtract(X, Y, Result) :- Result is X - Y.
-
-% Estraggo il contenuto tra parentesi e lo restituisco come Info
-extract_info(Line) :-
-    
-    sub_string(Line, Before, _, After, '['),
-    sub_string(Line, FirstBefore, _, FirstAfter, ']'),
-    sum(Before, 1, Result),
-    sum(FirstAfter, 1, ResultTwo),
-    sub_string(Line, Result , _, ResultTwo, FirstInfo),
-    sum(FirstBefore, 2, ResultThree),
-    sub_string(Line, ResultThree , _, 0, SecondInfoRaw),
-    ThirdInfoRaw = SecondInfoRaw,
-    sub_string(SecondInfoRaw, FourthBefore, _, FourthAfter, ']'),
-    sum(FourthAfter, 1, ResultFour),
-    sub_string(SecondInfoRaw, 1, _, ResultFour, SecondInfo),
-    sub_string(ThirdInfoRaw, FifthBefore, _, FifthAfter, ','),
-    sub_string(ThirdInfoRaw, SixthBefore, _, SixthAfter, ']'),
-    sum(SixthBefore, 3, ResultFive),
-    sub_string(ThirdInfoRaw, ResultFive, _, 0, NewThirdInfoRaw),
-    FourthInfoRaw = NewThirdInfoRaw,
-    sub_string(FourthInfoRaw, SeventhBefore, _, SeventhAfter, ']'),
-    sub_string(FourthInfoRaw, EighthBefore, _, EighthAfter, ')'),
-    sum(SeventhBefore, 2, ResultSix),
-    sum(EighthAfter, 1, ResultSeven),
-    sub_string(FourthInfoRaw, ResultSix, _, ResultSeven, FourthInfo),
-    sub_string(NewThirdInfoRaw, NinthBefore, _, NinthAfter, ']'),
-    sum(NinthAfter, 1, ResultEight),
-    sub_string(NewThirdInfoRaw, 0, _, ResultEight, FinalThirdInfoRaw),
-    create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,FinalThirdInfoRaw).
+add_to_list_deleting_duplicates([], _, Temp, Temp).
 
 
-create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,ThirdInfoRaw) :-
-    sub_string(ThirdInfoRaw, Before, _, After, ','),
-    sum(After, 1, Result),
-    sub_string(ThirdInfoRaw, 0, _, Result, ThirdInfo),
-    sum(Before, 1, ResultNine),
-    sub_string(ThirdInfoRaw, ResultNine, _, 0, NewThirdInfoRaw),
-    Transition = [FirstInfo,SecondInfo,ThirdInfo,FourthInfo],
-    add_to_list(Transition),
-    create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,NewThirdInfoRaw).
-
-create_transition_splitting_third(FirstInfo,SecondInfo,FourthInfo,ThirdInfoRaw) :-
+add_to_list_deleting_duplicates([H|B], SecondList, Temp, Output) :-
+    member(H, SecondList), 
     !,
-    List = [FirstInfo,SecondInfo,ThirdInfoRaw,FourthInfo],
-    add_to_list(List).
+    add_to_list_deleting_duplicates(B, SecondList, Temp, Output).
+
+add_to_list_deleting_duplicates([H|B], SecondList, Temp, Output) :-
+    add_to_list_deleting_duplicates(B, SecondList, [H|Temp], Output).
 
 
+% Procedura che stampa la lista in input e divide con dei trattini
+% la formattazione
+print_list(Stream, []) :-
+    write(Stream, '------------------------------------------'),nl(Stream),
+    flush_output(Stream).
+print_list(Stream, [H|B]) :-
+    writeln(Stream, H), 
+    print_list(Stream, B). 
 
+% Chiedo dove salvare il file pnml
+ask_folder_path(String) :-
+    write('Enter path where to save file: '),
+    read_line_to_string(user_input, String).
 
-
-
-% Predicate to print the list of objects with numbering
-print_transition(List) :-
-    print_objects(List, 1).
-
-% Base case: empty list
-print_objects([], _).
-
-% Recursive case: print the head of the list with numbering and recursively process the tail
-print_objects([Object | Rest], N) :-
-    format('~d: ~w~n', [N, Object]),
-    N1 is N + 1,
-    print_objects(Rest, N1).
+% Chiedo dove salvare il file pnml
+ask_module_name(String) :-
+    write('Enter the module name used: '),
+    read_line_to_string(user_input, String).

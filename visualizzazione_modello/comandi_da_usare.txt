@@ -1,0 +1,2 @@
+consult('Percorso_fino_al_file/model_explorator.pl').
+process_file('Percorso_fino_al_file/monday.wf').

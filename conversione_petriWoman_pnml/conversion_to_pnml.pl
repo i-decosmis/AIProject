@@ -50,19 +50,18 @@ extract_transitions(Transitions) :-
 
 % Estraggo tutti gli archi in una lista
 extract_arcs(Arcs) :-
-    findall(arc(T, P, TR), arc(T, P, TR), Arcs).
+    findall(arc(T, P, Token), arc(T, P, Token), Arcs).
 
 % Predicato che ci permette di copiare una lista in una delle 3 liste dinamiche dato indice in input
 copy_list(IdList, []) :-
     true.
-
 
 copy_list(IdList, [H | T]) :-
     add_string(IdList, H),
     copy_list(IdList, T).
 
 
-% Dato lo stream in input lo analizzo e richiamo la funzione con il nuovo Stream
+% Estraggo le informazioni dai fatti
 process_net :-
     extract_places(NewPlaces),
     copy_list(1, NewPlaces),
@@ -110,11 +109,11 @@ write_header(StreamWrite) :-
     write(StreamWrite, '    <page id="page1">'), nl(StreamWrite).
 
 
-% Questo predicato serve quando abbiamo finito tutti i place
+% Questa procedura serve quando abbiamo finito tutti i place
 write_places(StreamWrite, []) :-
     true.
 
-% Questo predicato serve quando ci sono ancora place da scrivere
+% Questa procedura serve quando ci sono ancora place da scrivere
 write_places(StreamWrite, [Place|Places]) :-
     write(StreamWrite, '        <place id="'),
     counter(Count),
@@ -128,11 +127,11 @@ write_places(StreamWrite, [Place|Places]) :-
     write(StreamWrite, '        </place>'), nl(StreamWrite),
     write_places(StreamWrite, Places).
 
-% Questo predicato serve quando abbiamo finito tutte le transition
+% Questa procedura serve quando abbiamo finito tutte le transition
 write_transitions(StreamWrite, []) :-
     true.
 
-% Questo predicato serve quando ci sono ancora transition da scrivere
+% Questa procedura serve quando ci sono ancora transition da scrivere
 write_transitions(StreamWrite, [Transition|Transitions]) :-
     write(StreamWrite, '        <transition id="'),
     counter(Count),
@@ -146,11 +145,11 @@ write_transitions(StreamWrite, [Transition|Transitions]) :-
     write(StreamWrite, '        </transition>'), nl(StreamWrite),
     write_transitions(StreamWrite, Transitions).
 
-% Questo predicato serve quando abbiamo finito tutti gli arc
+% Questa procedura serve quando abbiamo finito tutti gli arc
 write_arcs(StreamWrite, []) :-
     true.
 
-% Questo predicato serve quando ci sono ancora arc da scrivere
+% Questa procedura serve quando ci sono ancora arc da scrivere
 write_arcs(StreamWrite, [arc(Source, Target, Token)|Arcs]) :-
     write(StreamWrite, '        <arc id="'),
     counter(Count),
@@ -170,7 +169,7 @@ write_arcs(StreamWrite, [arc(Source, Target, Token)|Arcs]) :-
     write(StreamWrite, '        </arc>'), nl(StreamWrite),
     write_arcs(StreamWrite, Arcs).
 
-% Questo predicato serve quando dobbiamo scrivere il pie di pagina pnml
+% Questa procedura serve quando dobbiamo scrivere il pie di pagina pnml
 write_footer(StreamWrite) :-
     write(StreamWrite, '    </page>'), nl(StreamWrite),
     write(StreamWrite, '  </net>'), nl(StreamWrite),
