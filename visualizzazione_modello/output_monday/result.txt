@@ -1,0 +1,594 @@
+------------------------------------------
+Starting transition:
+[act_eat_meal,act_sit_down]-[act_read],[1-1],6
+You can continue to the following ones:
+monday:transition([act_read]-[act_play_phone],[1-1,18-1,26-1],5)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink]-[act_eat_meal,act_sit_down],[4-1,5-1,6-1],18
+You can continue to the following ones:
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[start]-[act_drink],[4-1,5-1,6-1],19
+You can continue to the following ones:
+monday:transition([act_drink]-[act_eat_meal,act_sit_down],[4-1,5-1,6-1],18)
+monday:transition([act_drink]-[stop],[4-1,6-1,12-1,16-1,17-1,24-1,25-1],15)
+monday:transition([act_drink]-[act_read,act_sit_down],[1-1,2-1,4-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],2)
+monday:transition([act_drink]-[act_read],[3-1,5-1,20-1,21-1,28-1,29-1,30-1],11)
+monday:transition([act_drink]-[act_sit_down,act_writing],[6-1,31-1],20)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_drink]-[act_brush_air],[11-1,15-1,23-1],33)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_sit_down,act_writing]-[stop],[8-1],24
+You can continue to the following ones:
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26
+You can continue to the following ones:
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_drink]-[act_sit_down,act_writing],[6-1,31-1],20)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_drink]-[act_read,act_sit_down],[1-1,2-1,4-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],2)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_drink]-[act_read],[3-1,5-1,20-1,21-1,28-1,29-1,30-1],11)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_drink]-[stop],[4-1,6-1,12-1,16-1,17-1,24-1,25-1],15)
+monday:transition([act_drink]-[act_brush_air],[11-1,15-1,23-1],33)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_drink]-[act_eat_meal,act_sit_down],[4-1,5-1,6-1],18)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[start]-[act_read],[8-1],27
+You can continue to the following ones:
+monday:transition([act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_read]-[act_play_phone],[1-1,18-1,26-1],5)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_play_phone]-[act_read],[9-1],28
+You can continue to the following ones:
+monday:transition([act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_read]-[act_play_phone],[1-1,18-1,26-1],5)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink,act_writing]-[act_play_phone],[9-1],29
+You can continue to the following ones:
+monday:transition([act_play_phone]-[act_read],[9-1],28)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_play_phone]-[act_sit_down,act_writing],[1-1,2-1,14-1,15-1,17-1,18-1,19-1,22-1,23-1,25-1,26-1,27-1,30-1],4)
+monday:transition([act_play_phone]-[act_writing],[7-1,21-1],22)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30
+You can continue to the following ones:
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_drink]-[act_sit_down,act_writing],[6-1,31-1],20)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_drink]-[act_read,act_sit_down],[1-1,2-1,4-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],2)
+monday:transition([act_drink]-[act_read],[3-1,5-1,20-1,21-1,28-1,29-1,30-1],11)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_drink]-[stop],[4-1,6-1,12-1,16-1,17-1,24-1,25-1],15)
+monday:transition([act_drink]-[act_brush_air],[11-1,15-1,23-1],33)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_drink]-[act_eat_meal,act_sit_down],[4-1,5-1,6-1],18)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_brush_air]-[act_read],[10-1],32
+You can continue to the following ones:
+monday:transition([act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_read]-[act_play_phone],[1-1,18-1,26-1],5)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25
+You can continue to the following ones:
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[start]-[act_drink,act_eat_meal,act_sit_down],[9-1,10-1],31
+You can continue to the following ones:
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_drink]-[act_sit_down,act_writing],[6-1,31-1],20)
+monday:transition([act_drink]-[act_read,act_sit_down],[1-1,2-1,4-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],2)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_drink]-[act_read],[3-1,5-1,20-1,21-1,28-1,29-1,30-1],11)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_drink]-[stop],[4-1,6-1,12-1,16-1,17-1,24-1,25-1],15)
+monday:transition([act_drink]-[act_brush_air],[11-1,15-1,23-1],33)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_drink]-[act_eat_meal,act_sit_down],[4-1,5-1,6-1],18)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16
+You can continue to the following ones:
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_play_phone]-[act_writing],[7-1,21-1],22
+You can continue to the following ones:
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23
+You can continue to the following ones:
+monday:transition([act_play_phone]-[act_writing],[7-1,21-1],22)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_play_phone]-[act_sit_down,act_writing],[1-1,2-1,14-1,15-1,17-1,18-1,19-1,22-1,23-1,25-1,26-1,27-1,30-1],4)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_play_phone]-[act_read],[9-1],28)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_brush_air]-[stop],[7-1,11-1,13-1,15-1,23-1],21
+You can continue to the following ones:
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink]-[act_brush_air],[11-1,15-1,23-1],33
+You can continue to the following ones:
+monday:transition([act_brush_air]-[stop],[7-1,11-1,13-1,15-1,23-1],21)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_brush_air]-[act_drink],[3-1,4-1,5-1,6-1,12-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],12)
+monday:transition([act_brush_air]-[act_read],[10-1],32)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink]-[stop],[4-1,6-1,12-1,16-1,17-1,24-1,25-1],15
+You can continue to the following ones:
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_read]-[act_play_phone],[1-1,18-1,26-1],5
+You can continue to the following ones:
+monday:transition([act_play_phone]-[act_sit_down,act_writing],[1-1,2-1,14-1,15-1,17-1,18-1,19-1,22-1,23-1,25-1,26-1,27-1,30-1],4)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_play_phone]-[act_writing],[7-1,21-1],22)
+monday:transition([act_play_phone]-[act_read],[9-1],28)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_sit_down]-[act_read],[18-1,26-1],35
+You can continue to the following ones:
+monday:transition([act_read]-[act_play_phone],[1-1,18-1,26-1],5)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36
+You can continue to the following ones:
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3
+You can continue to the following ones:
+monday:transition([act_drink]-[act_read,act_sit_down],[1-1,2-1,4-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],2)
+monday:transition([act_drink]-[act_brush_air],[11-1,15-1,23-1],33)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_drink]-[act_sit_down,act_writing],[6-1,31-1],20)
+monday:transition([act_drink]-[act_read],[3-1,5-1,20-1,21-1,28-1,29-1,30-1],11)
+monday:transition([act_drink]-[stop],[4-1,6-1,12-1,16-1,17-1,24-1,25-1],15)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_drink]-[act_eat_meal,act_sit_down],[4-1,5-1,6-1],18)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8
+You can continue to the following ones:
+monday:transition([act_play_phone]-[act_sit_down,act_writing],[1-1,2-1,14-1,15-1,17-1,18-1,19-1,22-1,23-1,25-1,26-1,27-1,30-1],4)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_play_phone]-[act_writing],[7-1,21-1],22)
+monday:transition([act_play_phone]-[act_read],[9-1],28)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9
+You can continue to the following ones:
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_read]-[act_play_phone],[1-1,18-1,26-1],5)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14
+You can continue to the following ones:
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10
+You can continue to the following ones:
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink]-[act_read],[3-1,5-1,20-1,21-1,28-1,29-1,30-1],11
+You can continue to the following ones:
+monday:transition([act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_read]-[act_play_phone],[1-1,18-1,26-1],5)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_play_phone]-[act_sit_down,act_writing],[1-1,2-1,14-1,15-1,17-1,18-1,19-1,22-1,23-1,25-1,26-1,27-1,30-1],4
+You can continue to the following ones:
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34
+You can continue to the following ones:
+monday:transition([act_play_phone]-[act_sit_down,act_writing],[1-1,2-1,14-1,15-1,17-1,18-1,19-1,22-1,23-1,25-1,26-1,27-1,30-1],4)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_play_phone]-[act_writing],[7-1,21-1],22)
+monday:transition([act_play_phone]-[act_read],[9-1],28)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1
+You can continue to the following ones:
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink]-[act_read,act_sit_down],[1-1,2-1,4-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],2
+You can continue to the following ones:
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+monday:transition([act_read]-[act_play_phone],[1-1,18-1,26-1],5)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_read]-[stop],[3-1,5-1,9-1,10-1,20-1,21-1,28-1,29-1,30-1],10)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_read]-[act_drink,act_eat_meal,act_sit_down],[8-1],26)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_brush_air]-[act_drink],[3-1,4-1,5-1,6-1,12-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],12
+You can continue to the following ones:
+monday:transition([act_drink]-[act_read],[3-1,5-1,20-1,21-1,28-1,29-1,30-1],11)
+monday:transition([act_drink]-[act_eat_meal,act_sit_down],[4-1,5-1,6-1],18)
+monday:transition([act_drink]-[stop],[4-1,6-1,12-1,16-1,17-1,24-1,25-1],15)
+monday:transition([act_drink]-[act_read,act_sit_down],[1-1,2-1,4-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],2)
+monday:transition([act_drink]-[act_sit_down,act_writing],[6-1,31-1],20)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_drink]-[act_brush_air],[11-1,15-1,23-1],33)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13
+You can continue to the following ones:
+monday:transition([act_brush_air]-[act_drink],[3-1,4-1,5-1,6-1,12-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],12)
+monday:transition([act_brush_air]-[stop],[7-1,11-1,13-1,15-1,23-1],21)
+monday:transition([act_brush_air]-[act_read],[10-1],32)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_drink]-[act_sit_down,act_writing],[6-1,31-1],20
+You can continue to the following ones:
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17
+You can continue to the following ones:
+monday:transition([act_drink]-[act_eat_meal,act_sit_down],[4-1,5-1,6-1],18)
+monday:transition([act_drink]-[stop],[4-1,6-1,12-1,16-1,17-1,24-1,25-1],15)
+monday:transition([act_drink]-[act_read,act_sit_down],[1-1,2-1,4-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],2)
+monday:transition([act_drink]-[act_sit_down,act_writing],[6-1,31-1],20)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_drink]-[act_read],[3-1,5-1,20-1,21-1,28-1,29-1,30-1],11)
+monday:transition([act_drink]-[act_brush_air],[11-1,15-1,23-1],33)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_drink,act_writing]-[act_play_phone],[9-1],29)
+------------------------------------------
+------------------------------------------
+Starting transition:
+[start]-[act_eat_meal,act_sit_down],[1-1,2-1,3-1,7-1,11-1,12-1,13-1,14-1,15-1,16-1,17-1,18-1,19-1,20-1,21-1,22-1,23-1,24-1,25-1,26-1,27-1,28-1,29-1,30-1,31-1],7
+You can continue to the following ones:
+monday:transition([act_eat_meal,act_sit_down]-[act_read],[1-1],6)
+monday:transition([act_sit_down,act_writing]-[act_drink],[1-1,2-1,11-1,14-1,15-1,18-1,19-1,22-1,23-1,26-1,27-1],3)
+monday:transition([act_read,act_sit_down]-[stop],[1-1,2-1,14-1,18-1,19-1,22-1,26-1,27-1,31-1],1)
+monday:transition([act_read,act_sit_down]-[act_play_phone],[2-1,19-1,27-1],8)
+monday:transition([act_eat_meal,act_sit_down]-[act_read,act_sit_down],[2-1,11-1,19-1,27-1],9)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[3-1,5-1,12-1,13-1,16-1,20-1,24-1,28-1,29-1],14)
+monday:transition([act_sit_down,act_writing]-[act_brush_air],[3-1,4-1,5-1,6-1,7-1,10-1,12-1,13-1,16-1,17-1,20-1,21-1,24-1,25-1,28-1,29-1,30-1,31-1],13)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone,act_sit_down],[7-1,21-1],23)
+monday:transition([act_read,act_sit_down]-[act_sit_down,act_writing],[4-1,11-1],16)
+monday:transition([act_eat_meal,act_sit_down]-[act_play_phone],[14-1,15-1,17-1,22-1,23-1,25-1,30-1],34)
+monday:transition([act_sit_down]-[act_read],[18-1,26-1],35)
+monday:transition([act_eat_meal,act_sit_down]-[act_sit_down],[18-1,26-1],36)
+monday:transition([act_eat_meal,act_sit_down]-[act_drink],[4-1,6-1,31-1],17)
+------------------------------------------
+Possible transitions that could happen even if the cases do not match:
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_sit_down,act_writing],[8-1,10-1],25)
+monday:transition([act_drink,act_eat_meal,act_sit_down]-[act_drink,act_writing],[9-1],30)
+monday:transition([act_sit_down,act_writing]-[stop],[8-1],24)
+------------------------------------------

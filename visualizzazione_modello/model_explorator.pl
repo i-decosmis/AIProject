@@ -14,6 +14,16 @@ set_module(Atom) :-
 get_module(Atom) :-
     module(Atom).
 
+% Inizializzo contatore usato nel salvataggio dei dati nel file pnml
+:- dynamic(counter/1).
+counter(0).
+
+% Inizializzo contatore per gli id dei place, delle transition e degli arc nel file pnml
+increment_counter :-
+    retract(counter(Count)),
+    CountPlusOne is Count + 1,
+    assert(counter(CountPlusOne)).
+
 % Variabile dinamica che viene utilizzata per salvare la transizione in analisi e poter
 % recuperare le sue informazioni da qualsiasi parte del codice
 :- dynamic current_transition/1.
@@ -30,22 +40,23 @@ get_current_transition(Transition) :-
 % Legge il file wf e lo elabora
 process_file(FileName) :-
     ask_folder_path(Path),
+    atom_concat(Path,"/result.txt",ResultPath),
     use_module(FileName),
     ask_module_name(ModuleString),
     string_to_atom(ModuleString, Module),
     set_module(Module),
-    open(Path, write, Stream),
-    do_works(Stream).
+    transition_check,
+    open(ResultPath, write, Stream),
+    do_works(Stream, Path).
 
 % Inizia esecuzione principale
-do_works(Stream) :-
+do_works(Stream, Path) :-
     get_module(Module),
     findall(Module:transition(Input-Output, Cases, Repetition), 
             Module:transition(Input-Output, Cases, Repetition), 
             ListTransitions),  % Gather all transitions into a list
     do_work(Module, Stream, ListTransitions),
-    generate_dot_file_orderingout,
-    generate_dot_file_rankinglr.
+    generate_dot_files(Path).
 
 % Esegue le operazioni di scrittura su file e recupero delle informazioni delle transition
 do_work(Module, Stream, [Module:transition(Input-Output, Cases, Repetition) | Rest]) :-
@@ -134,7 +145,8 @@ add_to_list_deleting_duplicates([H|B], SecondList, Temp, Output) :-
 
 
 % Predicato che stampa la lista in input e divide con dei trattini
-% la formattazione, non indica nessuna proprieta particolare sugli archi
+% la formattazione, inoltre genera i fatti rappresentanti gli archi del sistema
+% non indicando nessuna proprieta particolare sugli archi
 print_safe_list(Stream, []) :-
     write(Stream, '------------------------------------------'),nl(Stream),
     flush_output(Stream).
@@ -145,8 +157,8 @@ print_safe_list(Stream, [H|B]) :-
     print_safe_list(Stream, B). 
 
 % Questo predicato stampa la lista in input e divide con dei trattini
-% la formattazione.
-% In particolare questo predicato stampa anche la proprieta che indica lo stile degli archi(tratteggiato)
+% la formattazione, inoltre genera i fatti rappresentanti gli archi del sistema
+% includendo anche la proprieta che indica lo stile degli archi(tratteggiato)
 print_possible_list(Stream, []) :-
     write(Stream, '------------------------------------------'),nl(Stream),
     flush_output(Stream).
@@ -158,22 +170,12 @@ print_possible_list(Stream, [H|B]) :-
 
 % Chiedo dove salvare il file pnml
 ask_folder_path(String) :-
-    write('Enter path where to save file: '),
+    write('Enter path where to save output file(e.g. C:/User/Desktop): '),
     read_line_to_string(user_input, String).
 
 % Chiedo il nome del modulo usato
 ask_module_name(String) :-
     write('Enter the module name used: '),
-    read_line_to_string(user_input, String).
-
-% Chiedo dove salvare il primo file dot
-ask_dot_orderingout_path(String) :-
-    write('Enter path where to save file dot with ordering = out property(include name_file.dot): '),
-    read_line_to_string(user_input, String).
-
-% Chiedo dove salvare il secondo file dot
-ask_dot_rankinglr_path(String) :-
-    write('Enter path where to save file dot with rankdir=LR property(include name_file.dot): '),
     read_line_to_string(user_input, String).
 
 % Predicato che ci permette di verificare se ci sono elementi in comune tra due liste
@@ -189,25 +191,21 @@ contains_element([H|B], List) :-
 
 % Questo predicato genera un file dot che contiene tutta la descrizione del grafo.
 % Verra scritto con la proprieta ordering=out per la visualizzazione del grafo
-generate_dot_file_orderingout :-
-    ask_dot_orderingout_path(Path),
-    open(Path, write, Stream),
-    write(Stream, "digraph G {\n"),
-    write(Stream, "ordering=out;\n"),
-    write_edge(Stream),
-    write(Stream, "}\n"),
-    close(Stream).
-
-% Questo predicato genera un file dot che contiene tutta la descrizione del grafo.
-% Verra scritto con la proprieta rankdir=LR per la visualizzazione del grafo
-generate_dot_file_rankinglr :-
-    ask_dot_rankinglr_path(Path),
-    open(Path, write, Stream),
-    write(Stream, "digraph G {\n"),
-    write(Stream, "rankdir=LR;\n"),
-    write_edge(Stream),
-    write(Stream, "}\n"),
-    close(Stream).
+generate_dot_files(Path) :-
+    atom_concat(Path, "/orderingout.dot", OrderingPath),
+    open(OrderingPath, write, OrderingStream),
+    write(OrderingStream, "digraph G {\n"),
+    write(OrderingStream, "ordering=out;\n"),
+    write_edge(OrderingStream),
+    write(OrderingStream, "}\n"),
+    close(OrderingStream),
+    atom_concat(Path, "/rankdirlr.dot", RankdirlrPath),
+    open(RankdirlrPath, write, RankdirlrStream),
+    write(RankdirlrStream, "digraph G {\n"),
+    write(RankdirlrStream, "rankdir=LR;\n"),
+    write_edge(RankdirlrStream),
+    write(RankdirlrStream, "}\n"),
+    close(RankdirlrStream).
 
 % Questo predicato serve a stampare nel file dot tutti gli edge trovati 
 write_edge(Stream) :-
@@ -217,12 +215,13 @@ write_edge(Stream) :-
     length(FirstList, FirstWeight),
     length(SecondList, SecondWeight),
     number_of_items_in_common(FirstList, SecondList, Count),
-    format(Stream, '"~w Weight:~w"->"~w Weight:~w"[~wlabel="~w"];\n', [Module:transition(FirstInput-FirstOutput, FirstList, FirstRepetition), 
-                                                           FirstWeight,
-                                                           Module:transition(SecondInput-SecondOutput, SecondList, SecondRepetition), 
-                                                           SecondWeight,
-                                                           Properties,
-                                                           Count]),
+    format(Stream, '"~w Weight:~w"->"~w Weight:~w"[~wlabel="~w"];\n', 
+           [Module:transition(FirstInput-FirstOutput, FirstList, FirstRepetition), 
+            FirstWeight,
+            Module:transition(SecondInput-SecondOutput, SecondList, SecondRepetition), 
+            SecondWeight,
+            Properties,
+            Count]),
     fail.
 write_edge(_).
 
@@ -245,3 +244,16 @@ number_of_items_in_common([H|B], List, Count) :-
 number_of_items_in_common([H|B], List, Count) :-
     \+ member(H, List),
     number_of_items_in_common(B, List, Count).
+
+% Questo predicato viene usato nel caso in cui troviamo dei fatti
+% transition/2, che vengono convertiti a transition/3 aggiungendo un
+% valore unico come terzo elemento
+transition_check :-
+    get_module(Module),
+    clause(Module:Module:transition(FirstInput-FirstOutput, FirstList), true),
+    counter(Count),
+    increment_counter,
+    assert(Module:Module:transition(FirstInput-FirstOutput, FirstList,Count)),
+    fail.
+
+transition_check.

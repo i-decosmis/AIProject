@@ -3,10 +3,6 @@
 :- dynamic string_list2/1.
 :- dynamic string_list3/1.
 
-% Inizializzo contatore usato nel salvataggio dei dati nel file pnml
-:- dynamic(counter/1).
-counter(0).
-
 % Aggiunge stringa nella lista in input (1,2 o 3)
 add_string(ListNumber, String) :-
     (   retract(string_list(ListNumber, List))
@@ -21,12 +17,21 @@ get_strings(ListNumber, Strings) :-
     ;   Strings = []
     ).
 
+% Inizializzo contatore usato nel salvataggio dei dati nel file pnml
+:- dynamic(counter/1).
+counter(0).
+
+% Inizializzo contatore per gli id dei place, delle transition e degli arc nel file pnml
+increment_counter :-
+    retract(counter(Count)),
+    CountPlusOne is Count + 1,
+    assert(counter(CountPlusOne)).
+
 % Processa il file in input ed esporta il file pnml nuovo
 process_file(FileName) :-
     retractall(string_list(1, List)),
     retractall(string_list(2, List)),
     retractall(string_list(3, List)),
-    dynamic(counter/1),
     consult(FileName),
     process_net,        % Inizia ad analizzare la rete
     get_strings(1, Places),
@@ -37,8 +42,9 @@ process_file(FileName) :-
 
 % Chiedo dove salvare il file pnml
 ask_folder_path(String) :-
-    write('Enter path where to save file: '),
-    read_line_to_string(user_input, String).
+    write('Enter path where to save output file(e.g. C:/User/Desktop): '),
+    read_line_to_string(user_input, Read),
+    atom_concat(Read, "/petri_net.pnml", String).
 
 % Estraggo tutti i place in una lista
 extract_places(Places) :-
@@ -60,7 +66,6 @@ copy_list(IdList, [H | T]) :-
     add_string(IdList, H),
     copy_list(IdList, T).
 
-
 % Estraggo le informazioni dai fatti
 process_net :-
     extract_places(NewPlaces),
@@ -69,23 +74,6 @@ process_net :-
     copy_list(2, NewTransitions),
     extract_arcs(NewArcs),
     copy_list(3, NewArcs).
-
-
-% Funzione per stampare la lista in input
-print_list([]).                  % Caso base lista vuota
-print_list([Head|Tail]) :-       % Caso ricorsivo lista non vuota
-    writeln(Head),               % In output la testa della lista
-    print_list(Tail). 
-
-
-
-
-
-% Inizializzo contatore per gli id dei place, delle transition e degli arc nel file pnml
-increment_counter :-
-    retract(counter(Count)),
-    CountPlusOne is Count + 1,
-    assert(counter(CountPlusOne)).
 
 % Scrivo il file pnml dati place, transition e arc
 write_pnml(File, Places, Transitions, Arcs) :-
@@ -96,7 +84,6 @@ write_pnml(File, Places, Transitions, Arcs) :-
     write_arcs(StreamWrite, Arcs),
     write_footer(StreamWrite),
     close(StreamWrite).
-
 
 % Scrivo intestazione file
 write_header(StreamWrite) :-
@@ -109,11 +96,11 @@ write_header(StreamWrite) :-
     write(StreamWrite, '    <page id="page1">'), nl(StreamWrite).
 
 
-% Questa procedura serve quando abbiamo finito tutti i place
+% Questo predicato serve quando abbiamo finito tutti i place
 write_places(StreamWrite, []) :-
     true.
 
-% Questa procedura serve quando ci sono ancora place da scrivere
+% Questo predicato serve quando ci sono ancora place da scrivere
 write_places(StreamWrite, [Place|Places]) :-
     write(StreamWrite, '        <place id="'),
     counter(Count),
@@ -127,11 +114,11 @@ write_places(StreamWrite, [Place|Places]) :-
     write(StreamWrite, '        </place>'), nl(StreamWrite),
     write_places(StreamWrite, Places).
 
-% Questa procedura serve quando abbiamo finito tutte le transition
+% Questo predicato serve quando abbiamo finito tutte le transition
 write_transitions(StreamWrite, []) :-
     true.
 
-% Questa procedura serve quando ci sono ancora transition da scrivere
+% Questo predicato serve quando ci sono ancora transition da scrivere
 write_transitions(StreamWrite, [Transition|Transitions]) :-
     write(StreamWrite, '        <transition id="'),
     counter(Count),
@@ -145,11 +132,11 @@ write_transitions(StreamWrite, [Transition|Transitions]) :-
     write(StreamWrite, '        </transition>'), nl(StreamWrite),
     write_transitions(StreamWrite, Transitions).
 
-% Questa procedura serve quando abbiamo finito tutti gli arc
+% Questo predicato serve quando abbiamo finito tutti gli arc
 write_arcs(StreamWrite, []) :-
     true.
 
-% Questa procedura serve quando ci sono ancora arc da scrivere
+% Questo predicato serve quando ci sono ancora arc da scrivere
 write_arcs(StreamWrite, [arc(Source, Target, Token)|Arcs]) :-
     write(StreamWrite, '        <arc id="'),
     counter(Count),
@@ -169,9 +156,8 @@ write_arcs(StreamWrite, [arc(Source, Target, Token)|Arcs]) :-
     write(StreamWrite, '        </arc>'), nl(StreamWrite),
     write_arcs(StreamWrite, Arcs).
 
-% Questa procedura serve quando dobbiamo scrivere il pie di pagina pnml
+% Questo predicato serve quando dobbiamo scrivere il pie di pagina pnml
 write_footer(StreamWrite) :-
     write(StreamWrite, '    </page>'), nl(StreamWrite),
     write(StreamWrite, '  </net>'), nl(StreamWrite),
     write(StreamWrite, '</pnml>'), nl(StreamWrite).
-
